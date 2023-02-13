@@ -1,0 +1,17 @@
+# Arquivo responsável por armazenar as credenciais e outras
+# configurações da tela de autenticação.
+
+credentials:
+    usernames:
+        marcel:
+            name: Marcel Javierre
+            email: javierremarcel@poli.ufrj.br
+            # Senhas precisam ser armazenadas no formato hash. Utilize o
+            # módulo "hash_generator" dentro da pasta "tools" para
+            # converter as senhas. Para o usuário "marcel", a senha é
+            # "123456".
+            password: $2b$12$Op1k1onZfdUapFUIoZD.tuFmQ.e4QMUnaDIIp0tVRYPnN.45jn1Zm
+cookie:
+    name: random_cookie_name
+    key: random_signature_key
+    expiry_days: 30
