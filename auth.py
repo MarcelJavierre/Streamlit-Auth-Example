@@ -18,11 +18,6 @@ authenticator = stauth.Authenticate(
     configContent["cookie"]["expiry_days"],
 )
 
-# Variáveis para armazenar os dados da autenticação
-name: str
-status: bool
-username: str
-
 def authenticate() -> bool:
     """
     Função para verificar a autenticação do usuário.
@@ -32,18 +27,20 @@ def authenticate() -> bool:
     Verdadeiro caso a autenticação tenha sido bem-sucedida ou falso
     senão.
     """
-    # Permite alterar as variáveis globais "name", "status" e "username"
-    global name, status, username
+    # Se as variáveis de autenticação não tiverem sido iniciadas, inicia elas com o valor "None"
+    if "name" not in st.session_state: st.session_state["name"] = None
+    if "authentication_status" not in st.session_state: st.session_state["authentication_status"] = None
+    if "username" not in st.session_state: st.session_state["username"] = None
 
     # Cria a tela de login
-    name, status, username = authenticator.login("Login", "main")
+    st.session_state["name"], st.session_state["authentication_status"], st.session_state["username"] = authenticator.login("Login", "main")
 
     # Se a autenticação for bem-sucedida, retorna verdadeiro
-    if status:
+    if st.session_state["authentication_status"]:
         return True
     # Senão, se a autenticação não for bem-sucedida, mostra para o
     # usuário uma mensagem de erro e retorna falso
-    elif status == False:
+    elif st.session_state["authentication_status"] == False:
         # Mostra para o usuário uma mensagem de erro
         st.error("Nome de usuário e/ou senha incorreto(s).")
 
